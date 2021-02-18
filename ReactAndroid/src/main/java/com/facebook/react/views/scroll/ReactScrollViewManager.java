@@ -279,6 +279,18 @@ public class ReactScrollViewManager extends ViewGroupManager<ReactScrollView>
     view.setScrollbarFadingEnabled(!value);
   }
 
+  @ReactProp(name = "maintainVisibleContentPosition")
+    public void setMaintainVisibleContentPosition(ReactScrollView view, ReadableMap value) {
+      if (value != null) {
+        int minIndexForVisible = value.getInt("minIndexForVisible");
+        Integer autoScrollToTopThreshold = value.hasKey("autoscrollToTopThreshold") ? value.getInt("autoscrollToTopThreshold") : null;
+        ReactScrollViewMaintainVisibleContentPositionData maintainVisibleContentPositionData = new ReactScrollViewMaintainVisibleContentPositionData(minIndexForVisible, autoScrollToTopThreshold);
+        view.setMaintainVisibleContentPosition(maintainVisibleContentPositionData);
+      } else {
+        view.setMaintainVisibleContentPosition(null);
+      }
+    }
+
   @ReactProp(name = "fadingEdgeLength")
   public void setFadingEdgeLength(ReactScrollView view, int value) {
     if (value > 0) {
